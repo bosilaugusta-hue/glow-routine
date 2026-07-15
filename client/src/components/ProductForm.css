@@ -1,0 +1,153 @@
+.product-form {
+  position: sticky;
+  top: 1rem;
+
+  width: 320px;
+  height: fit-content;
+  padding: 1.7rem;
+
+  border: 1px solid rgb(255 255 255 / 85%);
+  border-radius: 30px;
+
+  background: rgb(255 245 247 / 52%);
+
+  box-shadow:
+    0 20px 45px rgb(178 72 111 / 15%),
+    inset 0 1px 0 rgb(255 255 255 / 95%);
+
+  backdrop-filter: blur(22px);
+}
+
+.product-form-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.product-form-header p {
+  margin-top: 0.35rem;
+  margin-bottom: 1.5rem;
+
+  color: #7c4b5c;
+  font-size: 0.72rem;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+
+.product-form form {
+  display: grid;
+  gap: 1rem;
+}
+
+.product-form label,
+.product-form legend {
+  color: #2f2026;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.product-form input,
+.product-form select {
+  width: 100%;
+  margin-top: 0.45rem;
+  padding: 0.85rem 1rem;
+
+  border: 1px solid rgb(255 255 255 / 90%);
+  border-radius: 14px;
+
+  outline: none;
+  background: rgb(255 255 255 / 48%);
+  color: #5e4650;
+}
+
+.product-form fieldset {
+  padding: 0;
+  border: 0;
+}
+
+.routine-options {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.55rem;
+}
+
+.routine-options label {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+
+  min-height: 42px;
+  padding: 0.55rem;
+
+  border: 1px solid rgb(255 255 255 / 90%);
+  border-radius: 14px;
+
+  background: rgb(255 255 255 / 42%);
+
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.routine-options input {
+  display: none;
+}
+
+.rating-options {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.rating-options button {
+  border: 0;
+  background: transparent;
+  color: #f14f7f;
+  font-size: 2rem;
+}
+
+.image-input {
+  position: relative;
+}
+
+.image-input svg {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+
+  transform: translateY(-28%);
+  color: #9f4f68;
+}
+
+.submit-product {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+
+  min-height: 56px;
+  margin-top: 0.6rem;
+
+  border: 1px solid rgb(255 255 255 / 95%);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f34e82 0%,
+      #ef6f95 55%,
+      #ffc3b5 100%
+    );
+
+  color: white;
+  font-weight: 600;
+
+  box-shadow:
+    0 12px 26px rgb(238 75 126 / 30%),
+    inset 0 1px 0 rgb(255 255 255 / 60%);
+}
