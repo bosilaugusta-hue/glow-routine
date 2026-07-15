@@ -2,102 +2,154 @@
   position: relative;
   overflow: hidden;
 
-  border: 1px solid rgb(255 255 255 / 85%);
-  border-radius: 24px;
+  min-height: 300px;
 
-  background: rgb(255 255 255 / 42%);
+  border: 1px solid rgb(255 255 255 / 72%);
+  border-radius: 22px;
+
+  /* Verre presque transparent */
+  background: rgb(255 255 255 / 3%);
+
+  /* Flou léger pour conserver la soie visible */
+  backdrop-filter: blur(7px) saturate(115%);
+  -webkit-backdrop-filter: blur(7px) saturate(115%);
 
   box-shadow:
-    0 12px 30px rgb(179 82 121 / 12%),
-    inset 0 1px 0 rgb(255 255 255 / 90%);
+    0 10px 24px rgb(135 61 85 / 8%),
+    inset 1px 1px 0 rgb(255 255 255 / 70%),
+    inset -1px -1px 0 rgb(255 255 255 / 16%);
+}
 
-  backdrop-filter: blur(18px);
+/* Petit reflet uniquement sur le bord supérieur */
+.product-card::after {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 12%;
+  z-index: 0;
+
+  width: 76%;
+  height: 1px;
+
+  background: rgb(255 255 255 / 90%);
+  box-shadow: 0 0 10px rgb(255 255 255 / 55%);
+
+  pointer-events: none;
+}
+
+.product-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .favorite-button {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  z-index: 1;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 3;
 
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   place-items: center;
 
-  border: 1px solid rgb(255 255 255 / 90%);
+  border: 1px solid rgb(255 255 255 / 72%);
   border-radius: 50%;
 
-  background: rgb(255 255 255 / 70%);
+  background: rgb(255 255 255 / 10%);
   color: #ef4f81;
+
+  box-shadow:
+    inset 1px 1px 0 rgb(255 255 255 / 75%),
+    0 5px 12px rgb(133 61 85 / 8%);
+
+  backdrop-filter: blur(5px);
 }
 
 .product-image {
   display: block;
   width: 100%;
-  height: 210px;
-  padding: 1rem;
+  height: 150px;
+  padding: 0.6rem;
 
   object-fit: contain;
 
-  background:
-    radial-gradient(circle at center, #fff 0%, #fde8ee 100%);
+  /* Aucun rectangle blanc ou rose derrière l’image */
+  background: transparent;
+
+  filter: drop-shadow(0 9px 7px rgb(95 46 61 / 13%));
 }
 
 .product-details {
-  padding: 1rem;
+  min-height: 108px;
+  padding: 0.65rem 0.8rem 0.55rem;
+
+  background: transparent;
 }
 
 .product-details h3 {
-  margin-bottom: 0.25rem;
-  font-size: 1rem;
+  margin: 0;
+
+  color: #2f2026;
+  font-size: 0.88rem;
+  font-weight: 700;
 }
 
 .product-brand {
+  margin-top: 0.15rem;
+
   color: #67515d;
-  font-size: 0.88rem;
+  font-size: 0.7rem;
 }
 
 .product-category {
   display: inline-block;
-  margin-top: 0.65rem;
-  padding: 0.3rem 0.65rem;
 
+  margin-top: 0.35rem;
+  padding: 0.18rem 0.45rem;
+
+  border: 1px solid rgb(255 255 255 / 35%);
   border-radius: 999px;
 
-  background: #f8d9e2;
+  background: rgb(239 112 145 / 10%);
   color: #8b405d;
 
-  font-size: 0.78rem;
+  font-size: 0.62rem;
 }
 
 .product-routine {
-  margin-top: 0.65rem;
+  margin-top: 0.35rem;
+
   color: #4f3a45;
-  font-size: 0.88rem;
+  font-size: 0.68rem;
 }
 
 .product-rating {
-  margin-top: 0.65rem;
+  margin-top: 0.35rem;
+
   color: #ef4f81;
-  letter-spacing: 0.12rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.04rem;
 }
 
 .product-rating span {
-  color: #cf9cac;
+  color: #c990a1;
 }
 
 .product-actions {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 
-  border-top: 1px solid rgb(255 255 255 / 80%);
+  min-height: 38px;
+
+  border-top: 1px solid rgb(255 255 255 / 42%);
+
+  background: transparent;
 }
 
 .product-actions button {
   display: grid;
-  width: 50%;
-  height: 46px;
   place-items: center;
 
   border: 0;
@@ -106,5 +158,9 @@
 }
 
 .product-actions button + button {
-  border-left: 1px solid rgb(255 255 255 / 80%);
+  border-left: 1px solid rgb(255 255 255 / 42%);
+}
+
+.product-actions button:hover {
+  background: rgb(255 255 255 / 8%);
 }

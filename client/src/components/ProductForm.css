@@ -1,21 +1,23 @@
 .product-form {
   position: sticky;
-  top: 1rem;
+  top: 0.75rem;
 
-  width: 320px;
+  width: 310px;
   height: fit-content;
-  padding: 1.7rem;
+  padding: 1.55rem;
 
-  border: 1px solid rgb(255 255 255 / 85%);
-  border-radius: 30px;
+  border: 1px solid rgb(255 255 255 / 72%);
+  border-radius: 28px;
 
-  background: rgb(255 245 247 / 52%);
+  background: rgb(255 255 255 / 4%);
 
   box-shadow:
-    0 20px 45px rgb(178 72 111 / 15%),
-    inset 0 1px 0 rgb(255 255 255 / 95%);
+    0 12px 30px rgb(126 58 79 / 8%),
+    inset 1px 1px 0 rgb(255 255 255 / 75%),
+    inset -1px -1px 0 rgb(255 255 255 / 14%);
 
-  backdrop-filter: blur(22px);
+  backdrop-filter: blur(8px) saturate(115%);
+  -webkit-backdrop-filter: blur(8px) saturate(115%);
 }
 
 .product-form-header h2 {
@@ -23,16 +25,22 @@
   align-items: center;
   gap: 0.45rem;
 
+  margin: 0;
+
+  color: #332129;
+
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.8rem;
   font-weight: 500;
+  line-height: 1;
 }
 
 .product-form-header p {
-  margin-top: 0.35rem;
+  margin-top: 0.45rem;
   margin-bottom: 1.5rem;
 
   color: #7c4b5c;
+
   font-size: 0.72rem;
   letter-spacing: 0.12rem;
   text-transform: uppercase;
@@ -46,6 +54,7 @@
 .product-form label,
 .product-form legend {
   color: #2f2026;
+
   font-size: 0.82rem;
   font-weight: 600;
 }
@@ -54,44 +63,81 @@
 .product-form select {
   width: 100%;
   margin-top: 0.45rem;
-  padding: 0.85rem 1rem;
+  padding: 0.8rem 0.9rem;
 
-  border: 1px solid rgb(255 255 255 / 90%);
-  border-radius: 14px;
+  border: 1px solid rgb(255 255 255 / 62%);
+  border-radius: 13px;
 
   outline: none;
-  background: rgb(255 255 255 / 48%);
+
+  background: rgb(255 255 255 / 8%);
   color: #5e4650;
+
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 35%);
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.product-form input::placeholder {
+  color: #8a6e78;
+}
+
+.product-form input:focus,
+.product-form select:focus {
+  border-color: rgb(255 255 255 / 92%);
+
+  box-shadow:
+    0 0 0 3px rgb(241 79 127 / 10%),
+    inset 0 1px 0 rgb(255 255 255 / 55%);
 }
 
 .product-form fieldset {
   padding: 0;
+
   border: 0;
 }
 
 .routine-options {
   display: flex;
   gap: 0.5rem;
+
   margin-top: 0.55rem;
 }
 
 .routine-options label {
   display: flex;
+  min-height: 42px;
   flex: 1;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
 
-  min-height: 42px;
   padding: 0.55rem;
 
-  border: 1px solid rgb(255 255 255 / 90%);
+  border: 1px solid rgb(255 255 255 / 58%);
   border-radius: 14px;
 
-  background: rgb(255 255 255 / 42%);
+  background: rgb(255 255 255 / 7%);
+  color: #4d353e;
 
   font-size: 0.72rem;
   font-weight: 500;
+
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 38%);
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.routine-options label:has(input:checked) {
+  border-color: rgb(255 255 255 / 88%);
+
+  background: rgb(242 91 134 / 14%);
+
+  box-shadow:
+    0 6px 15px rgb(221 77 119 / 12%),
+    inset 0 1px 0 rgb(255 255 255 / 62%);
 }
 
 .routine-options input {
@@ -100,19 +146,35 @@
 
 .rating-options {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.35rem;
+
   margin-top: 0.5rem;
 }
 
 .rating-options button {
+  padding: 0;
+
   border: 0;
+
   background: transparent;
   color: #f14f7f;
-  font-size: 2rem;
+
+  font-size: 1.85rem;
+  line-height: 1;
+
+  transition: transform 150ms ease;
+}
+
+.rating-options button:hover {
+  transform: translateY(-2px) scale(1.05);
 }
 
 .image-input {
   position: relative;
+}
+
+.image-input input {
+  padding-right: 2.8rem;
 }
 
 .image-input svg {
@@ -120,20 +182,23 @@
   top: 50%;
   right: 1rem;
 
-  transform: translateY(-28%);
   color: #9f4f68;
+
+  transform: translateY(-25%);
+
+  pointer-events: none;
 }
 
 .submit-product {
   display: flex;
+  min-height: 56px;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
 
-  min-height: 56px;
   margin-top: 0.6rem;
 
-  border: 1px solid rgb(255 255 255 / 95%);
+  border: 1px solid rgb(255 255 255 / 88%);
   border-radius: 18px;
 
   background:
@@ -145,9 +210,22 @@
     );
 
   color: white;
+
   font-weight: 600;
 
   box-shadow:
     0 12px 26px rgb(238 75 126 / 30%),
     inset 0 1px 0 rgb(255 255 255 / 60%);
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.submit-product:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 15px 30px rgb(238 75 126 / 36%),
+    inset 0 1px 0 rgb(255 255 255 / 68%);
 }

@@ -9,24 +9,28 @@ const stats = [
     label: "Produits",
     description: "dans ma collection",
     icon: collectionIcon,
+    tone: "pink",
   },
   {
     value: 8,
     label: "Favoris",
     description: "coups de cœur",
     icon: favoriteIcon,
+    tone: "heart",
   },
   {
     value: 12,
     label: "Routine Matin",
     description: "produits",
     icon: morningIcon,
+    tone: "sun",
   },
   {
     value: 12,
     label: "Routine Soir",
     description: "produits",
     icon: nightIcon,
+    tone: "moon",
   },
 ];
 
@@ -35,7 +39,7 @@ function StatsCards() {
     <section className="stats">
       {stats.map((stat) => (
         <article className="stat-card" key={stat.label}>
-          <span className="stat-icon-box">
+          <span className={`stat-icon-box ${stat.tone}`}>
             <img className="stat-icon" src={stat.icon} alt="" />
           </span>
 

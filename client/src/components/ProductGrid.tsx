@@ -1,5 +1,13 @@
 import { Search, SlidersHorizontal } from "lucide-react";
 
+import cremeApaisante from "../assets/products/creme-apaisante.png";
+import cremeSolaire from "../assets/products/creme-solaire.png";
+import lipMask from "../assets/products/lip-mask.png";
+import lotionTonique from "../assets/products/lotion-tonique.png";
+import masqueEclat from "../assets/products/masque-eclat.png";
+import nettoyantDoux from "../assets/products/nettoyant-doux.png";
+import retinol from "../assets/products/retinol.png";
+import serumHydratant from "../assets/products/serum-hydratant.png";
 import ProductCard from "./ProductCard";
 import "./ProductGrid.css";
 
@@ -11,8 +19,7 @@ const products = [
     category: "Sérum",
     routine: "Matin & Soir",
     rating: 4,
-    image:
-      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80",
+    image: serumHydratant,
     favorite: true,
   },
   {
@@ -22,8 +29,7 @@ const products = [
     category: "Crème",
     routine: "Soir",
     rating: 4,
-    image:
-      "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80",
+    image: cremeApaisante,
     favorite: false,
   },
   {
@@ -33,8 +39,7 @@ const products = [
     category: "Nettoyant",
     routine: "Matin",
     rating: 4,
-    image:
-      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80",
+    image: nettoyantDoux,
     favorite: true,
   },
   {
@@ -44,8 +49,47 @@ const products = [
     category: "Lotion",
     routine: "Matin & Soir",
     rating: 3,
-    image:
-      "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=600&q=80",
+    image: lotionTonique,
+    favorite: false,
+  },
+  {
+    id: 5,
+    name: "Rétinol 0.2%",
+    brand: "The Ordinary",
+    category: "Sérum",
+    routine: "Soir",
+    rating: 4,
+    image: retinol,
+    favorite: false,
+  },
+  {
+    id: 6,
+    name: "Lip Sleeping Mask",
+    brand: "Laneige",
+    category: "Lèvres",
+    routine: "Soir",
+    rating: 4,
+    image: lipMask,
+    favorite: true,
+  },
+  {
+    id: 7,
+    name: "Masque Éclat",
+    brand: "Biodance",
+    category: "Masque",
+    routine: "Soir",
+    rating: 4,
+    image: masqueEclat,
+    favorite: false,
+  },
+  {
+    id: 8,
+    name: "Crème Solaire",
+    brand: "La Roche-Posay",
+    category: "SPF",
+    routine: "Matin",
+    rating: 3,
+    image: cremeSolaire,
     favorite: false,
   },
 ];
@@ -78,6 +122,11 @@ function ProductGrid() {
           <ProductCard key={product.id} product={product} />
         ))}
       </section>
+
+      <button className="show-more-button" type="button">
+        Voir plus de produits
+        <span>⌄</span>
+      </button>
     </section>
   );
 }
