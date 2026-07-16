@@ -1,104 +1,110 @@
 import { Search, SlidersHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import cremeApaisante from "../assets/products/creme-apaisante.png";
-import cremeSolaire from "../assets/products/creme-solaire.png";
-import lipMask from "../assets/products/lip-mask.png";
-import lotionTonique from "../assets/products/lotion-tonique.png";
-import masqueEclat from "../assets/products/masque-eclat.png";
-import nettoyantDoux from "../assets/products/nettoyant-doux.png";
-import retinol from "../assets/products/retinol.png";
-import serumHydratant from "../assets/products/serum-hydratant.png";
+import { getProducts } from "../services/productServices";
+import type { Product } from "../types/Product";
 import ProductCard from "./ProductCard";
+
 import "./ProductGrid.css";
 
-const products = [
-  {
-    id: 1,
-    name: "Sérum Hydratant",
-    brand: "The Ordinary",
-    category: "Sérum",
-    routine: "Matin & Soir",
-    rating: 4,
-    image: serumHydratant,
-    favorite: true,
-  },
-  {
-    id: 2,
-    name: "Crème Apaisante",
-    brand: "Laneige",
-    category: "Crème",
-    routine: "Soir",
-    rating: 4,
-    image: cremeApaisante,
-    favorite: false,
-  },
-  {
-    id: 3,
-    name: "Nettoyant Doux",
-    brand: "CeraVe",
-    category: "Nettoyant",
-    routine: "Matin",
-    rating: 4,
-    image: nettoyantDoux,
-    favorite: true,
-  },
-  {
-    id: 4,
-    name: "Lotion Tonique",
-    brand: "Caudalie",
-    category: "Lotion",
-    routine: "Matin & Soir",
-    rating: 3,
-    image: lotionTonique,
-    favorite: false,
-  },
-  {
-    id: 5,
-    name: "Rétinol 0.2%",
-    brand: "The Ordinary",
-    category: "Sérum",
-    routine: "Soir",
-    rating: 4,
-    image: retinol,
-    favorite: false,
-  },
-  {
-    id: 6,
-    name: "Lip Sleeping Mask",
-    brand: "Laneige",
-    category: "Lèvres",
-    routine: "Soir",
-    rating: 4,
-    image: lipMask,
-    favorite: true,
-  },
-  {
-    id: 7,
-    name: "Masque Éclat",
-    brand: "Biodance",
-    category: "Masque",
-    routine: "Soir",
-    rating: 4,
-    image: masqueEclat,
-    favorite: false,
-  },
-  {
-    id: 8,
-    name: "Crème Solaire",
-    brand: "La Roche-Posay",
-    category: "SPF",
-    routine: "Matin",
-    rating: 3,
-    image: cremeSolaire,
-    favorite: false,
-  },
-];
+export type ProductView =
+  | "collection"
+  | "morning"
+  | "night"
+  | "favorites";
 
-function ProductGrid() {
+type ProductGridProps = {
+  view?: ProductView;
+};
+
+const pageTitles: Record<ProductView, string> = {
+  collection: "Ma Collection ✦",
+  morning: "Routine Matin ☀",
+  night: "Routine Soir ☾",
+  favorites: "Mes Favoris ♡",
+};
+
+function ProductGrid({
+  view = "collection",
+}: ProductGridProps) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        setIsLoading(true);
+        setError("");
+
+        const data = await getProducts();
+
+        setProducts(data);
+      } catch (loadError) {
+        console.error(loadError);
+        setError("Impossible de charger les produits.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    function handleProductsChanged() {
+      void loadProducts();
+    }
+
+    void loadProducts();
+
+    window.addEventListener(
+      "products:changed",
+      handleProductsChanged,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "products:changed",
+        handleProductsChanged,
+      );
+    };
+  }, []);
+
+  const normalizedSearch = search.trim().toLowerCase();
+
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(normalizedSearch) ||
+      product.brand.toLowerCase().includes(normalizedSearch) ||
+      product.category.toLowerCase().includes(normalizedSearch);
+
+    if (!matchesSearch) {
+      return false;
+    }
+
+    if (view === "morning") {
+      return (
+        product.routine === "Matin" ||
+        product.routine === "Matin & Soir"
+      );
+    }
+
+    if (view === "night") {
+      return (
+        product.routine === "Soir" ||
+        product.routine === "Matin & Soir"
+      );
+    }
+
+    if (view === "favorites") {
+      return product.favorite;
+    }
+
+    return true;
+  });
+
   return (
     <section className="collection">
       <header className="collection-header">
-        <h2>Ma Collection ✦</h2>
+        <h2>{pageTitles[view]}</h2>
 
         <section className="collection-tools">
           <label className="search-field">
@@ -106,7 +112,10 @@ function ProductGrid() {
 
             <input
               type="search"
+              value={search}
               placeholder="Rechercher un produit..."
+              aria-label="Rechercher un produit"
+              onChange={(event) => setSearch(event.target.value)}
             />
           </label>
 
@@ -117,16 +126,38 @@ function ProductGrid() {
         </section>
       </header>
 
-      <section className="product-grid">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </section>
+      {isLoading && (
+        <p className="collection-message">
+          Chargement des produits...
+        </p>
+      )}
 
-      <button className="show-more-button" type="button">
-        Voir plus de produits
-        <span>⌄</span>
-      </button>
+      {!isLoading && error && (
+        <p className="collection-message collection-error">
+          {error}
+        </p>
+      )}
+
+      {!isLoading &&
+        !error &&
+        filteredProducts.length === 0 && (
+          <p className="collection-message">
+            Aucun produit ne correspond à cette section.
+          </p>
+        )}
+
+      {!isLoading &&
+        !error &&
+        filteredProducts.length > 0 && (
+          <section className="product-grid">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+              />
+            ))}
+          </section>
+        )}
     </section>
   );
 }

@@ -1,10 +1,20 @@
 import DashboardHeader from "../components/DashboardHeader";
 import ProductForm from "../components/ProductForm";
-import ProductGrid from "../components/ProductGrid";
+import ProductGrid, {
+  type ProductView,
+} from "../components/ProductGrid";
 import Sidebar from "../components/Sidebar";
 import StatsCards from "../components/StatsCards";
 
-function Dashboard() {
+import "./Dashboard.css";
+
+type DashboardProps = {
+  view?: ProductView;
+};
+
+function Dashboard({
+  view = "collection",
+}: DashboardProps) {
   return (
     <main className="dashboard">
       <Sidebar />
@@ -15,7 +25,7 @@ function Dashboard() {
         <section className="dashboard-layout">
           <section className="dashboard-center">
             <StatsCards />
-            <ProductGrid />
+            <ProductGrid view={view} />
           </section>
 
           <ProductForm />

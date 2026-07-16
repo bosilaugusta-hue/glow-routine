@@ -2,9 +2,10 @@
   position: sticky;
   top: 0.75rem;
 
-  width: 310px;
+  width: 100%;
+max-width: 360px;
   height: fit-content;
-  padding: 1.55rem;
+  padding: 2rem;
 
   border: 1px solid rgb(255 255 255 / 72%);
   border-radius: 28px;
@@ -30,7 +31,7 @@
   color: #332129;
 
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 500;
   line-height: 1;
 }
@@ -228,4 +229,32 @@
   box-shadow:
     0 15px 30px rgb(238 75 126 / 36%),
     inset 0 1px 0 rgb(255 255 255 / 68%);
+}
+.product-form-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.cancel-edit-button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  place-items: center;
+
+  padding: 0;
+
+  border: 1px solid rgb(255 255 255 / 80%);
+  border-radius: 50%;
+
+  background: rgb(255 255 255 / 12%);
+  color: #8c3c58;
+
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 75%);
+}
+
+.cancel-edit-button:hover {
+  background: rgb(255 255 255 / 24%);
 }

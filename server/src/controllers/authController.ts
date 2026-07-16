@@ -23,13 +23,6 @@ export async function register(request: Request, response: Response) {
       return;
     }
 
-    if (password.length < 8) {
-      response.status(400).json({
-        message: "Le mot de passe doit contenir au moins 8 caractères",
-      });
-      return;
-    }
-
     const normalizedEmail = email.trim().toLowerCase();
 
     const [existingUsers] = await pool.query<UserRow[]>(
@@ -63,7 +56,7 @@ export async function register(request: Request, response: Response) {
       },
     });
   } catch (error) {
-    console.error("Register error:", error);
+    console.error(error);
 
     response.status(500).json({
       message: "Impossible de créer le compte",
@@ -124,7 +117,6 @@ export async function login(request: Request, response: Response) {
     const token = jwt.sign(
       {
         userId: user.user_id,
-        email: user.email,
       },
       jwtSecret,
       {
@@ -142,7 +134,7 @@ export async function login(request: Request, response: Response) {
       },
     });
   } catch (error) {
-    console.error("Login error:", error);
+    console.error(error);
 
     response.status(500).json({
       message: "Impossible de se connecter",

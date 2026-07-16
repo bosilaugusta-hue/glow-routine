@@ -13,36 +13,38 @@ const menuItems = [
   {
     label: "Ma Collection",
     icon: Home,
-    active: true,
+    path: "/dashboard",
   },
   {
     label: "Routine Matin",
     icon: Sun,
-    active: false,
+    path: "/routine-matin",
   },
   {
     label: "Routine Soir",
     icon: Moon,
-    active: false,
+    path: "/routine-soir",
   },
   {
     label: "Favoris",
     icon: Heart,
-    active: false,
+    path: "/favoris",
   },
   {
     label: "Statistiques",
     icon: BarChart3,
-    active: false,
+    path: "/statistiques",
   },
   {
     label: "Paramètres",
     icon: Settings,
-    active: false,
+    path: "/parametres",
   },
 ];
 
 function Sidebar() {
+  const currentPath = window.location.pathname;
+
   return (
     <aside className="sidebar">
       <header className="sidebar-brand">
@@ -55,20 +57,26 @@ function Sidebar() {
         <p>Mon journal skincare & self-care</p>
       </header>
 
-      <nav className="sidebar-nav">
+      <nav className="sidebar-nav" aria-label="Navigation principale">
         <ul>
           {menuItems.map((item) => {
             const Icon = item.icon;
+            const isActive = currentPath === item.path;
 
             return (
-              <li key={item.label}>
-                <button
-                  className={`sidebar-link ${item.active ? "active" : ""}`}
-                  type="button"
+              <li key={item.path}>
+                <a
+                  className={
+                    isActive
+                      ? "sidebar-link active"
+                      : "sidebar-link"
+                  }
+                  href={item.path}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   <Icon size={25} strokeWidth={1.8} />
                   <span>{item.label}</span>
-                </button>
+                </a>
               </li>
             );
           })}

@@ -4,6 +4,7 @@ import express from "express";
 
 import { pool } from "./db";
 import authRouter from "./routes/authRoutes";
+import productRouter from "./routes/productRoutes";
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;
@@ -41,6 +42,7 @@ app.get("/api/test-db", async (_request, response) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/products", productRouter);
 
 app.listen(port, () => {
   console.log(`API lancée sur http://localhost:${port}`);

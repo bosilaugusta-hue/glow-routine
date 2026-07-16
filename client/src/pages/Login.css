@@ -481,6 +481,18 @@
   white-space: nowrap;
 }
 
+.login-message {
+  margin: 0;
+  color: #b4234f;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.login-submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
 /* SOCIAL LOGIN */
 
 .social-login {

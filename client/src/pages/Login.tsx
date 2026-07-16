@@ -43,11 +43,61 @@ const features = [
   },
 ];
 
+type LoginResponse = {
+  message: string;
+  token?: string;
+  user?: {
+    id: number;
+    firstName: string;
+    email: string;
+  };
+};
+
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    setMessage("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        },
+      );
+
+      const data = (await response.json()) as LoginResponse;
+
+      if (!response.ok || !data.token || !data.user) {
+        setMessage(data.message || "La connexion a échoué");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+     window.location.assign("/dashboard");
+    } catch (error) {
+      console.error("Login error:", error);
+      setMessage("Impossible de contacter le serveur");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -122,8 +172,12 @@ function Login() {
               <UserRound size={20} />
 
               <input
-                type="text"
+                type="email"
                 placeholder="Ex : augusta@email.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                autoComplete="email"
+                required
               />
 
               <Sparkles size={17} />
@@ -139,6 +193,10 @@ function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Ex : ••••••••••••"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                autoComplete="current-password"
+                required
               />
 
               <button
@@ -148,7 +206,7 @@ function Login() {
                     ? "Masquer le mot de passe"
                     : "Afficher le mot de passe"
                 }
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() => setShowPassword((currentValue) => !currentValue)}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -166,10 +224,16 @@ function Login() {
             </button>
           </section>
 
-          <button className="login-submit" type="submit">
-            Se connecter
+          <button
+            className="login-submit"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? "Connexion..." : "Se connecter"}
             <Sparkles size={18} />
           </button>
+
+          {message && <p className="login-message">{message}</p>}
 
           <section className="login-separator">
             <span />
