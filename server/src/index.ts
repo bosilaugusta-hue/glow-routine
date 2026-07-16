@@ -1,12 +1,19 @@
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
+
 import { pool } from "./db";
+import authRouter from "./routes/authRoutes";
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:5174"],
+  }),
+);
+
 app.use(express.json());
 
 app.get("/api/health", (_request, response) => {
@@ -32,6 +39,8 @@ app.get("/api/test-db", async (_request, response) => {
     });
   }
 });
+
+app.use("/api/auth", authRouter);
 
 app.listen(port, () => {
   console.log(`API lancée sur http://localhost:${port}`);
