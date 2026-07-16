@@ -219,9 +219,12 @@ function Login() {
               <span>Se souvenir de moi</span>
             </label>
 
-            <button className="forgot-password" type="button">
-              Mot de passe oublié ?
-            </button>
+           <a
+  className="forgot-password"
+  href="/forgot-password"
+>
+  Mot de passe oublié ?
+</a>
           </section>
 
           <button
@@ -257,12 +260,13 @@ function Login() {
             </button>
           </section>
 
-          <p className="register-link">
-            Pas encore de compte ?
-            <button type="button">
-              Créer mon compte <span>›</span>
-            </button>
-          </p>
+         <p className="register-link">
+  Pas encore de compte ?
+
+  <a href="/register">
+    Créer mon compte <span>›</span>
+  </a>
+</p>
         </form>
       </section>
     </main>
