@@ -12,7 +12,6 @@ import collectionIcon from "../assets/icons/collection_bubble.png";
 import favoriteIcon from "../assets/icons/favorite_bubble.png";
 import morningIcon from "../assets/icons/morning_bubble.png";
 import nightIcon from "../assets/icons/night_bubble.png";
-import skincareTray from "../assets/images/skincare-tray.png";
 
 import "./Login.css";
 
@@ -57,10 +56,13 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(
+    event: React.FormEvent<HTMLFormElement>,
+  ) {
     event.preventDefault();
 
     setMessage("");
@@ -75,7 +77,7 @@ function Login() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email,
+            email: email.trim(),
             password,
           }),
         },
@@ -84,17 +86,23 @@ function Login() {
       const data = (await response.json()) as LoginResponse;
 
       if (!response.ok || !data.token || !data.user) {
-        setMessage(data.message || "La connexion a échoué");
+        setMessage(data.message || "La connexion a échoué.");
         return;
       }
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-     window.location.assign("/dashboard");
-    } catch (error) {
-      console.error("Login error:", error);
-      setMessage("Impossible de contacter le serveur");
+      if (rememberMe) {
+        localStorage.setItem("rememberMe", "true");
+      } else {
+        localStorage.removeItem("rememberMe");
+      }
+
+      window.location.assign("/dashboard");
+    } catch (loginError) {
+      console.error("Login error:", loginError);
+      setMessage("Impossible de contacter le serveur.");
     } finally {
       setIsLoading(false);
     }
@@ -133,12 +141,6 @@ function Login() {
           <strong>chaque jour⌄</strong>
         </section>
 
-        <img
-          className="login-tray"
-          src={skincareTray}
-          alt="Produits skincare et bouquet de fleurs sur un plateau"
-        />
-
         <section className="login-features">
           {features.map((feature) => (
             <article className="login-feature" key={feature.title}>
@@ -158,7 +160,8 @@ function Login() {
           <span className="welcome-icon">♡</span>
 
           <h2>
-            Bienvenue <Sparkles size={22} />
+            Bienvenue
+            <Sparkles size={22} />
           </h2>
 
           <p>Connectez-vous à votre espace</p>
@@ -166,18 +169,18 @@ function Login() {
 
         <form className="login-form" onSubmit={handleSubmit}>
           <label>
-            Email ou nom d’utilisateur
+            Email
 
             <span className="login-field">
               <UserRound size={20} />
 
               <input
                 type="email"
-                placeholder="Ex : augusta@email.com"
+                placeholder="Entrez votre email"
                 value={email}
-                onChange={(event) => setEmail(event.target.value)}
                 autoComplete="email"
                 required
+                onChange={(event) => setEmail(event.target.value)}
               />
 
               <Sparkles size={17} />
@@ -192,11 +195,13 @@ function Login() {
 
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Ex : ••••••••••••"
+                placeholder="Entrez votre mot de passe"
                 value={password}
-                onChange={(event) => setPassword(event.target.value)}
                 autoComplete="current-password"
                 required
+                onChange={(event) =>
+                  setPassword(event.target.value)
+                }
               />
 
               <button
@@ -206,26 +211,47 @@ function Login() {
                     ? "Masquer le mot de passe"
                     : "Afficher le mot de passe"
                 }
-                onClick={() => setShowPassword((currentValue) => !currentValue)}
+                onClick={() =>
+                  setShowPassword(
+                    (currentValue) => !currentValue,
+                  )
+                }
               >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {showPassword ? (
+                  <EyeOff size={20} />
+                ) : (
+                  <Eye size={20} />
+                )}
               </button>
             </span>
           </label>
 
           <section className="login-options">
             <label className="remember-me">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(event) =>
+                  setRememberMe(event.target.checked)
+                }
+              />
+
               <span>Se souvenir de moi</span>
             </label>
 
-           <a
-  className="forgot-password"
-  href="/forgot-password"
->
-  Mot de passe oublié ?
-</a>
+            <a
+              className="forgot-password"
+              href="/forgot-password"
+            >
+              Mot de passe oublié ?
+            </a>
           </section>
+
+          {message && (
+            <p className="login-message">
+              {message}
+            </p>
+          )}
 
           <button
             className="login-submit"
@@ -236,37 +262,20 @@ function Login() {
             <Sparkles size={18} />
           </button>
 
-          {message && <p className="login-message">{message}</p>}
-
           <section className="login-separator">
             <span />
-            <i>✦</i>
-            <p>ou continuer avec</p>
-            <i>✦</i>
+            <p>ou</p>
             <span />
           </section>
 
-          <section className="social-login">
-            <button type="button" aria-label="Continuer avec Google">
-              <strong className="google-logo">G</strong>
-            </button>
+          <p className="register-question">
+            Pas encore de compte ?
+          </p>
 
-            <button type="button" aria-label="Continuer avec Apple">
-              <strong className="apple-logo">●</strong>
-            </button>
-
-            <button type="button" aria-label="Continuer avec une autre option">
-              <span className="social-heart">♡</span>
-            </button>
-          </section>
-
-         <p className="register-link">
-  Pas encore de compte ?
-
-  <a href="/register">
-    Créer mon compte <span>›</span>
-  </a>
-</p>
+          <a className="register-button" href="/register">
+            <UserRound size={19} />
+            Créer un compte
+          </a>
         </form>
       </section>
     </main>
