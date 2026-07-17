@@ -12,6 +12,7 @@ import collectionIcon from "../assets/icons/collection_bubble.png";
 import favoriteIcon from "../assets/icons/favorite_bubble.png";
 import morningIcon from "../assets/icons/morning_bubble.png";
 import nightIcon from "../assets/icons/night_bubble.png";
+import skincareTray from "../assets/images/skincare-tray.png";
 
 import "./Login.css";
 
@@ -112,8 +113,8 @@ function Login() {
     <main className="login-page">
       <button className="language-button" type="button">
         <Globe2 size={19} />
-        FR
-        <span>⌄</span>
+        <span>FR</span>
+        <span aria-hidden="true">⌄</span>
       </button>
 
       <section className="login-showcase">
@@ -128,9 +129,11 @@ function Login() {
         </header>
 
         <section className="login-quote">
-          <span />
-          <i>✦</i>
-          <span />
+          <section className="login-quote-line" aria-hidden="true">
+            <span />
+            <i>✦</i>
+            <span />
+          </section>
 
           <p>
             Prenez soin de votre peau,
@@ -138,8 +141,14 @@ function Login() {
             de votre bien-être et de vous,
           </p>
 
-          <strong>chaque jour⌄</strong>
+          <strong>chaque jour ♡</strong>
         </section>
+
+        <img
+          className="login-tray"
+          src={skincareTray}
+          alt="Plateau de produits skincare accompagné d’un bouquet de fleurs"
+        />
 
         <section className="login-features">
           {features.map((feature) => (
@@ -169,14 +178,14 @@ function Login() {
 
         <form className="login-form" onSubmit={handleSubmit}>
           <label>
-            Email
+            Email ou nom d’utilisateur
 
             <span className="login-field">
               <UserRound size={20} />
 
               <input
                 type="email"
-                placeholder="Entrez votre email"
+                placeholder="Ex : augusta@email.com"
                 value={email}
                 autoComplete="email"
                 required
@@ -195,7 +204,7 @@ function Login() {
 
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Entrez votre mot de passe"
+                placeholder="Ex : ••••••••••••"
                 value={password}
                 autoComplete="current-password"
                 required
@@ -274,7 +283,7 @@ function Login() {
 
           <a className="register-button" href="/register">
             <UserRound size={19} />
-            Créer un compte
+            Créer mon compte
           </a>
         </form>
       </section>

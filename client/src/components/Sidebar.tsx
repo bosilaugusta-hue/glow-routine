@@ -7,6 +7,9 @@ import {
   Sun,
 } from "lucide-react";
 
+import profileImage from "../assets/images/augusta-profile.png";
+import sidebarFlowers from "../assets/images/sidebar-flowers.png";
+
 import "./Sidebar.css";
 
 const menuItems = [
@@ -57,7 +60,10 @@ function Sidebar() {
         <p>Mon journal skincare & self-care</p>
       </header>
 
-      <nav className="sidebar-nav" aria-label="Navigation principale">
+      <nav
+        className="sidebar-nav"
+        aria-label="Navigation principale"
+      >
         <ul>
           {menuItems.map((item) => {
             const Icon = item.icon;
@@ -83,10 +89,21 @@ function Sidebar() {
         </ul>
       </nav>
 
-      <section className="sidebar-profile">
-        <span className="profile-avatar">A</span>
+      <img
+        className="sidebar-flowers"
+        src={sidebarFlowers}
+        alt=""
+        aria-hidden="true"
+      />
 
-        <section>
+      <section className="sidebar-profile">
+        <img
+          className="profile-avatar"
+          src={profileImage}
+          alt="Avatar d’Augusta"
+        />
+
+        <section className="profile-details">
           <h3>Augusta ✦</h3>
           <p>Prenez soin de vous</p>
           <span>♥</span>

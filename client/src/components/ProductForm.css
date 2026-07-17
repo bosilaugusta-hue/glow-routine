@@ -3,7 +3,7 @@
   top: 0.75rem;
 
   width: 100%;
-max-width: 360px;
+  max-width: 360px;
   height: fit-content;
   padding: 2rem;
 
@@ -203,12 +203,10 @@ max-width: 360px;
   border-radius: 18px;
 
   background:
-    linear-gradient(
-      135deg,
+    linear-gradient(135deg,
       #f34e82 0%,
       #ef6f95 55%,
-      #ffc3b5 100%
-    );
+      #ffc3b5 100%);
 
   color: white;
 
@@ -230,6 +228,7 @@ max-width: 360px;
     0 15px 30px rgb(238 75 126 / 36%),
     inset 0 1px 0 rgb(255 255 255 / 68%);
 }
+
 .product-form-header {
   display: flex;
   align-items: flex-start;
@@ -257,4 +256,161 @@ max-width: 360px;
 
 .cancel-edit-button:hover {
   background: rgb(255 255 255 / 24%);
+}
+
+/* =========================================
+   FORM TEXT COLORS
+========================================= */
+
+.product-form {
+  color: rgb(255 255 255 / 96%);
+}
+
+.product-form-header h2 {
+  color: rgb(255 255 255 / 98%);
+
+  text-shadow:
+    0 2px 12px rgb(87 44 91 / 22%),
+    0 0 12px rgb(255 255 255 / 10%);
+}
+
+.product-form-header h2 svg {
+  color: #ffd6e5;
+}
+
+.product-form-header p {
+  color: rgb(255 255 255 / 76%);
+}
+
+.product-form form>label,
+.product-form legend {
+  color: rgb(255 255 255 / 94%);
+
+  font-weight: 600;
+
+  text-shadow: 0 2px 7px rgb(73 39 78 / 18%);
+}
+
+.product-form input,
+.product-form select {
+  color: #4d3540;
+}
+
+.product-form input::placeholder {
+  color: #8c6a77;
+}
+
+.product-form select option {
+  color: #4d3540;
+  background: #fce9ef;
+}
+
+.routine-options label {
+  color: rgb(255 255 255 / 92%);
+}
+
+.rating-options button {
+  color: #ff5f90;
+}
+
+.image-input svg {
+  color: #9b4767;
+}
+
+.product-form-message {
+  color: rgb(255 255 255 / 94%);
+}
+
+.product-form-error {
+  color: #fff0f4;
+}
+
+.product-form-success {
+  color: #fff;
+}
+
+/* =========================================
+   FORM GLASS PANEL
+========================================= */
+
+.product-form {
+  border: 1px solid rgb(255 255 255 / 78%);
+  border-radius: 30px;
+
+  background:
+    linear-gradient(145deg,
+      rgb(255 255 255 / 15%),
+      rgb(255 214 231 / 8%),
+      rgb(220 201 255 / 7%));
+
+  box-shadow:
+    0 22px 48px rgb(108 66 122 / 15%),
+    0 0 25px rgb(255 150 198 / 14%),
+    inset 1px 1px 0 rgb(255 255 255 / 86%),
+    inset -1px -1px 0 rgb(255 190 220 / 14%);
+
+  backdrop-filter: blur(13px) saturate(118%);
+  -webkit-backdrop-filter: blur(13px) saturate(118%);
+}
+
+/* =========================================
+   FINAL PRODUCT FORM COLORS
+========================================= */
+
+.product-form {
+  color: #35242b;
+
+  background:
+    linear-gradient(145deg,
+      rgb(255 255 255 / 20%),
+      rgb(255 221 234 / 11%),
+      rgb(235 218 255 / 9%));
+
+  box-shadow:
+    0 0 8px rgb(255 255 255 / 62%),
+    0 0 24px rgb(255 149 198 / 18%),
+    0 22px 48px rgb(93 65 117 / 16%),
+    inset 1px 1px 0 rgb(255 255 255 / 88%);
+}
+
+.product-form-header h2 {
+  color: #fff;
+
+  text-shadow:
+    0 2px 8px rgb(70 38 76 / 32%),
+    0 0 12px rgb(255 255 255 / 18%);
+}
+
+.product-form-header p {
+  color: rgb(255 255 255 / 82%);
+
+  text-shadow: 0 2px 5px rgb(68 39 77 / 26%);
+}
+
+.product-form form>label,
+.product-form legend {
+  color: #35242b;
+
+  text-shadow: 0 1px 3px rgb(255 255 255 / 28%);
+}
+
+.product-form input,
+.product-form select {
+  color: #4a343d;
+
+  background: rgb(255 255 255 / 14%);
+}
+
+.product-form input::placeholder {
+  color: #8b6e79;
+}
+
+.routine-options label {
+  color: #3d2b32;
+}
+
+.rating-options button {
+  color: #f35688;
+
+  filter: drop-shadow(0 2px 3px rgb(244 93 142 / 16%));
 }

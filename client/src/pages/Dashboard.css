@@ -2,23 +2,19 @@
    DASHBOARD PAGE
 ========================================= */
 
-.dashboard,
-.dashboard * {
-  box-sizing: border-box;
-}
-
 .dashboard {
   display: grid;
-  grid-template-columns: 275px minmax(0, 1fr);
-  gap: 1.8rem;
+  grid-template-columns: 305px minmax(0, 1fr);
+
+  gap: 2rem;
 
   width: 100%;
   min-height: 100vh;
-  padding: 0.75rem;
+
+  padding: 1rem;
 
   background:
-   url("/background/app-background.png") center / cover
-    no-repeat fixed;
+    url("/background/app-background.png") center / cover no-repeat fixed;
 }
 
 /* =========================================
@@ -27,81 +23,84 @@
 
 .dashboard-main {
   display: flex;
-  min-width: 0;
   flex-direction: column;
 
-  padding: 0 0.75rem 1.5rem;
+  min-width: 0;
+
+  padding: 0 1rem 2rem;
+  overflow: visible;
 }
 
 /* =========================================
-   HEADER
+   DASHBOARD HEADER
 ========================================= */
 
 .dashboard-header {
   position: relative;
+  overflow: visible;
 
   width: 100%;
-  min-height: 175px;
+  min-height: 155px;
 
-  margin-bottom: 0.5rem;
-  padding: 2rem 1rem 0;
+  margin-bottom: 0;
+  padding: 1.25rem 1rem 0;
 }
 
 .dashboard-header h1 {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
   margin: 0;
 
-  color: #302126;
+  color: #23191d;
 
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.8rem, 4vw, 4.2rem);
+  font-size: clamp(3rem, 4vw, 4.35rem);
   font-weight: 500;
-  line-height: 1;
+  line-height: 0.95;
 }
 
 .dashboard-header h1 span {
-  color: #ef5c82;
+  color: #f3648d;
 
   font-family: "Brush Script MT", cursive;
   font-size: 1.08em;
   font-weight: 400;
+
+  text-shadow: 0 3px 12px rgb(240 87 135 / 16%);
 }
 
 .dashboard-header p {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
-  margin: 1.2rem 0 0;
+  margin: 1rem 0 0;
 
-  color: #49363c;
+  color: #3f2d34;
 
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   letter-spacing: 0.22rem;
   text-transform: uppercase;
 }
 
 /* =========================================
-   COSMETIC TRAY
+   HEADER COSMETIC TRAY
 ========================================= */
 
 .dashboard-banner {
   position: absolute;
-  top: -22px;
-  right: 0;
+  top: 18px;
+  right: -55px;
   z-index: 1;
 
-  display: block;
-  width: min(610px, 52%);
-  height: 220px;
+  width: min(1050px, 78%);
+  height: 380px;
 
   object-fit: contain;
-  object-position: right top;
+  object-position: right center;
 
   filter:
-    drop-shadow(0 15px 24px rgb(126 68 73 / 12%))
-    saturate(98%);
+    drop-shadow(0 22px 34px rgb(121 58 82 / 18%)) drop-shadow(0 0 28px rgb(255 164 205 / 24%)) saturate(106%);
 
   pointer-events: none;
 }
@@ -112,12 +111,18 @@
 
 .dashboard-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 315px;
-  gap: 1.4rem;
+
+  grid-template-columns:
+    minmax(0, 1fr) 380px;
+
+  gap: 2rem;
+
   align-items: start;
 
   width: 100%;
   min-width: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .dashboard-center {
@@ -215,15 +220,16 @@
    FORM COLUMN
 ========================================= */
 
-.dashboard-layout > .product-form {
+.dashboard-layout>.product-form {
   position: sticky;
-  top: 0.75rem;
+  top: 1rem;
 
   width: 100%;
-  max-width: 315px;
+  max-width: 380px;
   height: fit-content;
-
   justify-self: end;
+
+  margin-top: 10.5rem;
 }
 
 /* =========================================
@@ -241,7 +247,7 @@
     gap: 1rem;
   }
 
-  .dashboard-layout > .product-form {
+  .dashboard-layout>.product-form {
     max-width: 285px;
   }
 
@@ -264,11 +270,13 @@
     grid-template-columns: 1fr;
   }
 
-  .dashboard-layout > .product-form {
+  .dashboard-layout>.product-form {
     position: static;
 
     width: 100%;
     max-width: none;
+
+    margin-top: 2rem;
 
     justify-self: stretch;
   }
@@ -280,7 +288,7 @@
     padding: 0.65rem;
   }
 
-  .dashboard > .sidebar {
+  .dashboard>.sidebar {
     position: relative;
     top: auto;
 
@@ -319,4 +327,38 @@
   .stats {
     grid-template-columns: 1fr;
   }
+}
+
+/* =========================================
+   FINAL HEADER COLORS
+========================================= */
+
+.dashboard-header h1 {
+  color: #26191e;
+
+  text-shadow: 0 2px 8px rgb(255 255 255 / 18%);
+}
+
+.dashboard-header h1 span {
+  color: #f36691;
+
+  text-shadow:
+    0 2px 10px rgb(237 76 132 / 18%),
+    0 0 10px rgb(255 184 211 / 18%);
+}
+
+
+.stats {
+  box-shadow:
+    0 0 7px rgb(255 255 255 / 52%),
+    0 0 22px rgb(255 161 205 / 14%),
+    0 14px 34px rgb(113 72 120 / 10%),
+    inset 1px 1px 0 rgb(255 255 255 / 82%);
+}
+
+.stat-card {
+  box-shadow:
+    0 0 5px rgb(255 255 255 / 45%),
+    0 8px 20px rgb(117 76 126 / 7%),
+    inset 1px 1px 0 rgb(255 255 255 / 64%);
 }
